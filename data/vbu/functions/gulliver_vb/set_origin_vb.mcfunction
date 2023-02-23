@@ -10,6 +10,7 @@ kill @e[tag=vb]
 # vb_info:1ブロック単位の情報を格納
 # vb_world:仮想座標などワールドに関する情報を格納
 # vb_calc_param:サイズや位置など計算に利用
+# click_info:クリックされた面などの情報を格納
 # ---- ---- ---- ---- ---- ---- ---- ---- ---- ---- ---- ---- ---- ---- ---- ---- ---- ---- ---- ----
 data modify storage vbu:datas player_input set value {}
 data modify storage vbu:datas player_input.left_hand set from entity @p Inventory[{Slot:-106b}]
@@ -17,6 +18,7 @@ data modify storage vbu:datas player_input.main_hand set from entity @p Selected
 data modify storage vbu:datas vb_info set value {}
 data modify storage vbu:datas vb_world set value {}
 data modify storage vbu:datas vb_calc_param set value {vb_size_3vec:[0.0f,0.0f,0.0f],vb_size_half_3vec:[0.0f,0.0f,0.0f]}
+data modify storage vbu:datas click_info set value {}
 
 # ---- ---- ---- ---- ---- ---- ---- ---- ---- ---- ---- ---- ---- ---- ---- ---- ---- ---- ---- ----
 # 世界系の大小フラグ
@@ -39,6 +41,7 @@ execute if data storage vbu:datas player_input.left_hand{id:"minecraft:fermented
 # vb_calc_param.vb_size
 scoreboard players set $vb_size _ 100000
 execute store result score $tmp _ run data get storage vbu:datas player_input.left_hand.Count 1
+execute if score $tmp _ = $const_int_0 _ run scoreboard players set $tmp _ 1 
 execute unless data storage vbu:datas vb_world{is_small:true} store result storage vbu:datas vb_calc_param.vb_size float 0.00001 run scoreboard players operation $vb_size _ *= $tmp _
 execute if data storage vbu:datas vb_world{is_small:true} store result storage vbu:datas vb_calc_param.vb_size float 0.00001 run scoreboard players operation $vb_size _ /= $tmp _
 # vb_calc_param.vb_size_3vec
@@ -63,6 +66,8 @@ execute store result storage vbu:datas vb_calc_param.vb_size_half_3vec[2] float 
 data modify storage vbu:datas vb_info.vPos set value [0,0,0]
 # 表示ブロック
 data modify storage vbu:datas vb_info.id set value "minecraft:bedrock"
+# 仮想ワールド(storage)にブロック情報を登録
+data modify storage vbu:datas vb_world.coodinate append from storage vbu:datas vb_info
 
 # 仮想ブロックの設置
 # coreという名のテキスト
