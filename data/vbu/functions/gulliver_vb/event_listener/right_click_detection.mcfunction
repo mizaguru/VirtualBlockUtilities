@@ -3,7 +3,7 @@
 # 仮想ブロック右クリックイベント
 # --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- ---
 # 右クリックされたinteracitonにタグづけ
-tag @e[tag=detection,nbt={interaction:{}},limit=1] add r_click
+tag @e[tag=vb,tag=detection,nbt={interaction:{}},limit=1] add r_click
 
 # 設置する仮想ブロック情報作成
 # 仮想座標 vb_info.vPosと計算用として$target:クリックした仮想座標 $next:設置しようとしている仮想座標
@@ -16,6 +16,7 @@ scoreboard players operation $target dz = @e[tag=r_click,limit=1] dz
 
 # 表示ブロック情報取得
 #  メインハンドが紙以外の場合:表示ブロック情報をメインハンドアイテムに更新
+data modify storage vbu:datas player_input.main_hand.id set value ""
 data modify storage vbu:datas player_input.main_hand set from entity @p SelectedItem
 execute if entity @e[tag=r_click] unless data storage vbu:datas player_input.main_hand{id:"minecraft:paper"} run data modify storage vbu:datas vb_info.id set from storage vbu:datas player_input.main_hand.id
 #  メインハンドが紙場合:クリックした仮想ブロックの表示ブロック情報を取得:紙を複製ツールとして利用するため
@@ -35,4 +36,4 @@ execute unless data storage vbu:datas player_input.main_hand{id:"minecraft:paper
 # --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- ---
 # 進捗リセット
 # --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- ---
-advancement revoke @a only vbu:click_vb/right_click
+advancement revoke @a only vbu:click_vb/right_click_detection

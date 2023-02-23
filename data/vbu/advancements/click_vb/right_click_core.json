@@ -1,0 +1,26 @@
+{
+	"parent": "vbu:click_vb/root",
+	"display": {
+		"title": "",
+		"description": "",
+		"icon": {
+			"item": "air"
+		},
+		"show_toast": false,
+		"announce_to_chat": false
+	},
+	"criteria": {
+		"right_click": {
+			"trigger": "minecraft:player_interacted_with_entity",
+			"conditions": {
+				"entity": {
+					"type": "minecraft:interaction",
+					"nbt": "{Tags:[\"vb\",\"core\"]}"
+				}
+			}
+		}
+	},
+	"rewards": {
+		"function": "vbu:gulliver_vb/event_listener/right_click_core"
+	}
+}

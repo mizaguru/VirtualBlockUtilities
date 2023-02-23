@@ -30,3 +30,7 @@ scoreboard players set $const_int_7 _ 7
 scoreboard players set $const_int_8 _ 8
 scoreboard players set $const_int_9 _ 9
 scoreboard players set $const_int_10 _ 10
+scoreboard players set $const_int_15 _ 15
+scoreboard players set $const_int_20 _ 20
+scoreboard players set $const_int_30 _ 30
+scoreboard players set $const_int_40 _ 40

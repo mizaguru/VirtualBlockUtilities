@@ -70,12 +70,20 @@ data modify storage vbu:datas vb_info.id set value "minecraft:bedrock"
 data modify storage vbu:datas vb_world.coodinate append from storage vbu:datas vb_info
 
 # 仮想ブロックの設置
-# coreという名のテキスト
-execute as @s at @s anchored eyes positioned ^ ^ ^1.0 align xyz summon text_display run function vbu:gulliver_vb/set_vb_core_info
-# ブロック表示
-execute as @e[tag=core,tag=first,limit=1] at @s run function vbu:gulliver_vb/set_vb_display
-# クリック判定
-execute as @e[tag=core,tag=first,limit=1] at @s run function vbu:gulliver_vb/set_vb_interaction
+scoreboard players set $target x 0
+scoreboard players set $target y 0
+scoreboard players set $target z 0
+# core looking_atするためにinteraction
+summon minecraft:interaction ~ ~ ~ {height:0,Tags:["vb","core","origin"]}
+execute as @s at @s anchored eyes positioned ^ ^ ^1.0 align xyz as @e[tag=vb,tag=origin,limit=1] run tp @s ~ ~ ~
+execute as @e[tag=vb,tag=origin,limit=1] at @s run function vbu:gulliver_vb/set_vb_core_info
+#  ブロック表示
+execute as @e[tag=vb,tag=origin,limit=1] at @s run function vbu:gulliver_vb/set_vb_display
+#  クリック判定
+execute as @e[tag=core,tag=origin,limit=1] at @s run function vbu:gulliver_vb/set_vb_interaction
+#  仮想ブロックを選択状態にする
+execute as @e[tag=vb] if score @s x = $target x if score @s y = $target y if score @s z = $target z run tag @s add check
+scoreboard players set $tick _ 9
 
-# 初期設定が完了したのでフラグを削除
-tag @e[tag=core,tag=first,limit=1] remove first
+tag @e[tag=vb,tag=origin] remove origin
+

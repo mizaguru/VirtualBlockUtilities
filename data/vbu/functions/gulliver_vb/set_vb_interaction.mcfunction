@@ -10,15 +10,6 @@ execute positioned ~ ~-0.001 ~ run summon minecraft:interaction ~ ~ ~ {height:0,
 execute positioned ~ ~ ~00.001 run summon minecraft:interaction ~ ~ ~ {height:0,width:0,Rotation:[000f,000f],Tags:["vb","detection","first","z+","z"]}
 execute positioned ~ ~ ~-0.001 run summon minecraft:interaction ~ ~ ~ {height:0,width:0,Rotation:[180f,000f],Tags:["vb","detection","first","z-","z"]}
 
-# 位置の設定
-#  x,zは半ブロック分位置補正
-execute as @e[type=interaction,tag=detection,tag=first] run execute store result score @s _ run data get storage vbu:datas vb_calc_param.vb_size_half_3vec[0] 100000
-execute as @e[type=interaction,tag=detection,tag=first] run execute store result score @s x run data get entity @s Pos[0] 100000
-execute as @e[type=interaction,tag=detection,tag=first] run execute store result entity @s Pos[0] double 0.00001 run scoreboard players operation @s x += @s _
-execute as @e[type=interaction,tag=detection,tag=first] run execute store result score @s _ run data get storage vbu:datas vb_calc_param.vb_size_half_3vec[2] 100000
-execute as @e[type=interaction,tag=detection,tag=first] run execute store result score @s z run data get entity @s Pos[2] 100000
-execute as @e[type=interaction,tag=detection,tag=first] run execute store result entity @s Pos[2] double 0.00001 run scoreboard players operation @s z += @s _
-
 # サイズの設定
 execute as @e[type=interaction,tag=detection,tag=first] run data modify entity @s height set from storage vbu:datas vb_calc_param.vb_size
 execute as @e[type=interaction,tag=detection,tag=first] run data modify entity @s width set from storage vbu:datas vb_calc_param.vb_size

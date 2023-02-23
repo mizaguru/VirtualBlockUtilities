@@ -13,18 +13,14 @@
 		"left_click": {
 			"trigger": "minecraft:player_hurt_entity",
 			"conditions": {
-				"player": {
-					"condition": "minecraft:entity_properties",
-					"entity": "this",
-					"predicate": {
-						"type": "minecraft:interaction",
-						"nbt": "{Tags:[\"vbu\"]}"
-					}
+				"entity": {
+					"type": "minecraft:interaction",
+					"nbt": "{Tags:[\"vb\",\"core\"]}"
 				}
 			}
 		}
 	},
 	"rewards": {
-		"function": "vbu:gulliver_vb/event_listener/left_click"
+		"function": "vbu:gulliver_vb/event_listener/left_click_core"
 	}
 }

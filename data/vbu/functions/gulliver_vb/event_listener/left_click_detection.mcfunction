@@ -12,4 +12,4 @@ tag @e[tag=detection,tag=l_click] remove l_click
 # --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- ---
 # 進捗リセット
 # --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- ---
-advancement revoke @a only vbu:click_vb/left_click
+advancement revoke @a only vbu:click_vb/left_click_detection
